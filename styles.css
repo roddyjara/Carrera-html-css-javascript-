@@ -1,0 +1,485 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #2d3436;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Fondo de carretera */
+.road-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            #34495e 0px,
+            #34495e 100px,
+            #2c3e50 100px,
+            #2c3e50 200px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            #27ae60 0px,
+            #27ae60 60px,
+            #ecf0f1 60px,
+            #ecf0f1 65px,
+            #27ae60 65px,
+            #27ae60 125px
+        );
+    background-attachment: fixed;
+    z-index: -1;
+    animation: roadMove 5s linear infinite;
+}
+
+@keyframes roadMove {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 0 100px, 0 100px; }
+}
+
+/* Créditos */
+.credits {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85em;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    letter-spacing: 1px;
+}
+
+.credits strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Menú de Inicio */
+.menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(102, 126, 234, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.menu-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { 
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.game-logo h1 {
+    font-size: 4.5em;
+    background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 50%, #6BCF7F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    font-weight: 900;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.subtitle {
+    font-size: 0.9em;
+    color: #999;
+    font-weight: 300;
+    letter-spacing: 4px;
+    margin-top: -10px;
+    margin-bottom: 30px;
+}
+
+.select-text {
+    font-size: 1.1em;
+    color: #666;
+    margin: 20px 0;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* Selección de Autos */
+.car-selection {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.car-option {
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.car-option:hover {
+    transform: scale(1.1);
+    background: #e9ecef;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.car-option.selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+}
+
+.car-option.selected p {
+    color: white;
+    font-weight: bold;
+}
+
+.car-preview {
+    font-size: 4em;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.car-option:hover .car-preview {
+    animation: bounce 0.6s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.car-option p {
+    font-size: 1.1em;
+    color: #333;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 8px 0;
+}
+
+.car-stats {
+    font-size: 0.75em;
+    color: #888;
+    font-weight: 400;
+    display: block;
+}
+
+.selected-car-info {
+    margin: 20px 0;
+    font-size: 0.9em;
+    color: #888;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.selected-car-info p {
+    margin: 0;
+}
+
+/* Botones */
+.start-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    font-weight: bold;
+    margin: 10px;
+}
+
+.start-button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+}
+
+.start-button:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.start-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.start-button.quit {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+}
+
+.start-button.quit:hover {
+    box-shadow: 0 8px 20px rgba(245, 87, 108, 0.6);
+}
+
+/* Contenedor del Juego */
+.game-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-info {
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    gap: 15px;
+}
+
+.fuel-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 200px;
+}
+
+.fuel-bar {
+    width: 120px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.fuel-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff00 0%, #ffff00 50%, #ff0000 100%);
+    transition: width 0.3s ease;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.fuel-bar-fill.low {
+    animation: pulse 0.5s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.game-info span {
+    color: #fff;
+    font-size: 1.3em;
+    margin-left: 8px;
+}
+
+.game-info {
+    font-size: 0.95em;
+    letter-spacing: 1px;
+}
+
+.score, .speed {
+    text-transform: uppercase;
+}
+
+#gameCanvas {
+    border: 4px solid #667eea;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+    background: #1a1a1a;
+}
+
+.controls {
+    margin-top: 10px;
+    color: white;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.controls p {
+    margin: 5px;
+}
+
+/* Animaciones de Fondo */
+body::before {
+    content: '';
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.05) 10px,
+        rgba(255, 255, 255, 0.05) 20px
+    );
+    animation: moveBackground 20s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes moveBackground {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50%, 50%); }
+}
+
+/* Game Over Styles */
+.gameover-title {
+    font-size: 4em;
+    color: #FF4444;
+    margin-bottom: 15px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.reason-text {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stats-box {
+    display: flex;
+    gap: 40px;
+    margin: 25px 0;
+    padding: 20px 40px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 15px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-label {
+    font-size: 0.75em;
+    color: #999;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 2.5em;
+    color: #667eea;
+    font-weight: 900;
+}
+
+.pause-title {
+    font-size: 4em;
+    color: #667eea;
+    margin-bottom: 30px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.controls p {
+    margin: 0;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+    }
+    
+    .game-info {
+        width: 100%;
+        padding: 10px 20px;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 0.85em;
+    }
+    
+    .fuel-container {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .car-selection {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .menu-content {
+        padding: 30px 40px;
+    }
+    
+    .game-logo h1 {
+        font-size: 3em;
+    }
+    
+    .stats-box {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+

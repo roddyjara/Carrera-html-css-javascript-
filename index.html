@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RACE - Highway Rush</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Créditos -->
+    <div class="credits">Desarrollado por <strong>Roddy Jara</strong></div>
+
+    <!-- Fondo de carretera -->
+    <div class="road-background"></div>
+    <!-- Menú de Inicio -->
+    <div id="startMenu" class="menu-container">
+        <div class="menu-content">
+            <div class="game-logo">
+                <h1>RACE</h1>
+                <p class="subtitle">HIGHWAY RUSH</p>
+            </div>
+            <p class="select-text">Elige tu corredor</p>
+            <div class="car-selection">
+                <div class="car-option" data-car="red">
+                    <div class="car-preview red-car">🚗</div>
+                    <p>FIRE BOLT</p>
+                    <span class="car-stats">Velocidad máxima</span>
+                </div>
+                <div class="car-option" data-car="blue">
+                    <div class="car-preview blue-car">🚙</div>
+                    <p>VOID RUNNER</p>
+                    <span class="car-stats">Control perfecto</span>
+                </div>
+                <div class="car-option" data-car="yellow">
+                    <div class="car-preview yellow-car">🚕</div>
+                    <p>BLITZ STRIKE</p>
+                    <span class="car-stats">Aceleración rápida</span>
+                </div>
+            </div>
+            <div class="selected-car-info">
+                <p>← Selecciona tu auto</p>
+            </div>
+            <button id="startBtn" class="start-button" disabled>ACEPTAR</button>
+        </div>
+    </div>
+
+    <!-- Juego -->
+    <div id="gameContainer" class="game-container hidden">
+        <div class="game-info">
+            <div class="score">SCORE <span id="score">0</span></div>
+            <div class="fuel-container">
+                <span style="font-size: 1.2em;">⛽</span>
+                <div class="fuel-bar">
+                    <div id="fuelBar" class="fuel-bar-fill"></div>
+                </div>
+                <span id="fuelPercent">100</span>
+            </div>
+            <div class="speed">SPD <span id="speed">1</span></div>
+        </div>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <div class="controls">
+            <p>← → MOVER | ⛽ RECOLECTAR | ESC PAUSA</p>
+        </div>
+    </div>
+
+    <!-- Pantalla de Game Over -->
+    <div id="gameOverMenu" class="menu-container hidden">
+        <div class="menu-content">
+            <h1 class="gameover-title">GAME OVER</h1>
+            <p id="gameOverReason" class="reason-text">Sin combustible</p>
+            <div class="stats-box">
+                <div class="stat">
+                    <span class="stat-label">SCORE</span>
+                    <span class="stat-value" id="finalScore">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">DISTANCE</span>
+                    <span class="stat-value" id="finalDistance">0</span>
+                </div>
+            </div>
+            <button id="restartBtn" class="start-button">MENÚ</button>
+        </div>
+    </div>
+
+    <!-- Pantalla de Pausa -->
+    <div id="pauseMenu" class="menu-container hidden">
+        <div class="menu-content">
+            <h1 class="pause-title">PAUSED</h1>
+            <button id="resumeBtn" class="start-button">RESUME</button>
+            <button id="quitBtn" class="start-button quit">QUIT</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
+
